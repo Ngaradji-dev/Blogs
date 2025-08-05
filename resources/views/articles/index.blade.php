@@ -12,52 +12,56 @@
                     <iconify-icon icon="ic:baseline-plus"></iconify-icon> Ajouter Article
                 </a>
             </div>
-            <div class="table-responsive">
-                <table class="table bordered-table mb-0">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Titre</th>
-                            <th>Catégorie</th>
-                            <th>Contenu</th>
-                            <th>Date de création</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($articles as $index => $article)
-                        <tr>
-                            <td>{{ $index + 1 }}</td>
-                            <td>{{ $article->titre }}</td>
-                            <td>{{ $article->category->titre ?? 'Non défini' }}</td>
-                            <td>{{ Str::limit($article->contenu, 50) }}</td>
-                            <td>{{ $article->created_at->format('d/m/Y') }}</td>
-                            <td class="d-flex gap-2">
-                                <a href="{{ route('article.show', $article) }}" class="btn btn-info btn-sm">
-                                    <iconify-icon icon="majesticons:eye-line"></iconify-icon>
-                                </a>
-                                <a href="{{ route('article.edit', $article) }}" class="btn btn-success btn-sm">
-                                    <iconify-icon icon="lucide:edit"></iconify-icon>
-                                </a>
+            <div class="card basic-data-table">
 
-                                <!-- Formulaire suppression avec SweetAlert -->
-                                <form id="delete-form-{{ $article->id }}" action="{{ route('article.delete', $article) }}" method="POST" style="display:inline;">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete({{ $article->id }})">
-                                        <iconify-icon icon="fluent:delete-24-regular"></iconify-icon>
-                                    </button>
-                                </form>
-                            </td>
-                        </tr>
-                        @endforeach
-                        @if($articles->isEmpty())
-                        <tr>
-                            <td colspan="6" class="text-center">Aucun article trouvé</td>
-                        </tr>
-                        @endif
-                    </tbody>
-                </table>
+                <div class="card-body">
+                    <table class="table bordered-table mb-0" id="dataTable" data-page-length='10'>
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Titre</th>
+                                <th>Catégorie</th>
+                                <th>Contenu</th>
+                                <th>Date de création</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($articles as $index => $article)
+                            <tr>
+                                <td>{{ $index + 1 }}</td>
+                                <td>{{ $article->titre }}</td>
+                                <td>{{ $article->category->titre ?? 'Non défini' }}</td>
+                                <td>{{ Str::limit($article->contenu, 50) }}</td>
+                                <td>{{ $article->created_at->format('d/m/Y') }}</td>
+                                <td class="d-flex gap-2">
+                                    <a href="{{ route('article.show', $article) }}" class="btn btn-info btn-sm">
+                                        <iconify-icon icon="majesticons:eye-line"></iconify-icon>
+                                    </a>
+                                    <a href="{{ route('article.edit', $article) }}" class="btn btn-success btn-sm">
+                                        <iconify-icon icon="lucide:edit"></iconify-icon>
+                                    </a>
+
+                                    <!-- Formulaire suppression avec SweetAlert -->
+                                    <form id="delete-form-{{ $article->id }}" action="{{ route('article.delete', $article) }}" method="POST" style="display:inline;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete({{ $article->id }})">
+                                            <iconify-icon icon="fluent:delete-24-regular"></iconify-icon>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                            @endforeach
+                            @if($articles->isEmpty())
+                            <tr>
+                                <td colspan="6" class="text-center">Aucun article trouvé</td>
+                            </tr>
+                            @endif
+                        </tbody>
+
+                    </table>
+                </div>
             </div>
         </div>
     </div>
@@ -87,7 +91,7 @@
             icon: 'success',
             title: 'Succès',
             text: @json(session('success')),
-            timer: 3000,
+            timer: 1500,
             timerProgressBar: true,
             showConfirmButton: false
         });
@@ -98,7 +102,7 @@
             icon: 'error',
             title: 'Erreur',
             text: @json(session('error')),
-            timer: 3000,
+            timer: 1500,
             timerProgressBar: true,
             showConfirmButton: false
         });

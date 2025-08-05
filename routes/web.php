@@ -25,7 +25,7 @@ Route::prefix('article')->name('article.')->group(function () {
     Route::get('/', [ArticleController::class, 'index'])->name('index');
     Route::get('/create', [ArticleController::class, 'create'])->name('create');
     Route::post('/store', [ArticleController::class, 'store'])->name('store');
-    Route::get('/{id}', [ArticleController::class, 'show'])->name('show'); // pour le bouton "voir"
+    Route::get('/{article}', [ArticleController::class, 'show'])->name('show'); // pour le bouton "voir"
     Route::get('/{id}/edit', [ArticleController::class, 'edit'])->name('edit');
     Route::put('/{id}/update', [ArticleController::class, 'update'])->name('update');
     Route::delete('/{article}/delete', [ArticleController::class, 'destroy'])->name('delete');

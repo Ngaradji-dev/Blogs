@@ -14,10 +14,10 @@
                 <li class="">
                     <a href="{{ route('home') }}">
                         <iconify-icon icon="solar:home-smile-angle-outline" class="menu-icon"></iconify-icon>
-                        <span>Dashboard</span>
+                        <span>Tableau de bord</span>
                     </a>
                 </li>
-                <li class="sidebar-menu-group-title">Application</li>
+                <li class="sidebar-menu-group-title">Modules</li>
 
 
                 <li class="dropdown">

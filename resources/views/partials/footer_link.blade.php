@@ -29,6 +29,9 @@
 
     <script src="{{URL::to('blog/assets/js/homeOneChart.js')}}"></script>
 
+    <script>
+        let table = new DataTable('#dataTable');
+    </script>
 
     <script>
         // ================== Image Upload Js Start ===========================
